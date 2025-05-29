@@ -7,9 +7,10 @@ export interface LoginDto {
 }
 
 export interface RegisterDto {
-    name: string,
+    fullname: string,
     email: string,
     password: string,
+    phoneNumber: string,
 }
 
 export const login = async (data: LoginDto) => {

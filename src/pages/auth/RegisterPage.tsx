@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 const RegisterPage = () => {
     const navigate = useNavigate();
 
-    const [name, setName] = useState('');
+    const [fullname, setFullname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('')
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -18,7 +19,7 @@ const RegisterPage = () => {
         setSuccess('');
 
         try {
-            await register({ name, email, password });
+            await register({ fullname, email, password, phoneNumber });
             setSuccess('Registration successful. Redirecting to login...');
             setTimeout(() => navigate('/auth/login'), 1500);
         } catch (err: any) {
@@ -38,8 +39,8 @@ const RegisterPage = () => {
                         variant="outlined"
                         fullWidth
                         margin="normal"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={fullname}
+                        onChange={(e) => setFullname(e.target.value)}
                         required
                     />
                     <TextField
@@ -50,6 +51,16 @@ const RegisterPage = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <TextField
+                        label="Phone"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        type="normal"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                         required
                     />
                     <TextField
