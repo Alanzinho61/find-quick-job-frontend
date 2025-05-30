@@ -9,6 +9,7 @@ const DashboardPage = () => {
         <Box>
             <Typography variant="h4" gutterBottom>
                 Welcome to FindQuickJob 👋
+
             </Typography>
             {user && (
                 <Typography variant="h6">
@@ -16,6 +17,8 @@ const DashboardPage = () => {
                 </Typography>
             )}
         </Box>
+
+
     );
 };
 

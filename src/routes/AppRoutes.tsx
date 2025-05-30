@@ -5,6 +5,7 @@ import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
 import RouteGuard from './RouteGuard';
 import DashboardPage from '../pages/DashboardPage';
+import JobListPage from '../pages/Job/JobListPage';
 
 const AppRoutes = () => {
     return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
                 }
             >
                 <Route index element={<DashboardPage />} />
+                <Route path='jobs' element={<JobListPage />} />
             </Route>
 
             {/* 404 fallback */}

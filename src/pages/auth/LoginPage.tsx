@@ -6,7 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const navigate = useNavigate();
-    const setToken = useAuthStore((state) => state.setToken);
+    //const setToken = useAuthStore((state) => state.setToken);
+    const { setToken } = useAuthStore();
+
+
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -67,3 +70,6 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+
+
