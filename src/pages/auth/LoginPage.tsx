@@ -22,10 +22,13 @@ const LoginPage = () => {
         try {
             const response = await login({ email, password });
             setToken(response.token);
+
             navigate('/'); // Başarılı giriş sonrası ana sayfaya yönlendir
         } catch (err: any) {
             setError(err.response?.data || 'Login failed');
         }
+
+
     };
 
     return (
