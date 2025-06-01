@@ -13,7 +13,7 @@ const DashboardPage = () => {
             </Typography>
             {user && (
                 <Typography variant="h6">
-                    Logged in as: {user.name} ({user.email})
+                    Logged in as: {user.fullName} ({user.email})
                 </Typography>
             )}
         </Box>

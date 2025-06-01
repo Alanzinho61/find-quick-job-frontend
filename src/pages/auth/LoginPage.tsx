@@ -7,9 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
     const navigate = useNavigate();
     //const setToken = useAuthStore((state) => state.setToken);
-    const { setToken } = useAuthStore();
-
-
+    const { setToken, setUser } = useAuthStore();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +19,15 @@ const LoginPage = () => {
 
         try {
             const response = await login({ email, password });
+
+            //Zustanda set ediliyor.
             setToken(response.token);
+            setUser({
+                id: response.userId,
+                fullName: response.fullName,
+                email: response.email,
+            });
+
 
             navigate('/'); // Başarılı giriş sonrası ana sayfaya yönlendir
         } catch (err: any) {

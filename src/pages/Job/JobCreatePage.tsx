@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../../api/axiousInstance';
 import { useNavigate } from 'react-router-dom';
 import { JobTypeLabels, WorkType } from '../../constants/enum';
+import { useAuthStore } from '../../store/authStore';
 
 const JobCreatePage = () => {
     const [form, setForm] = useState({
@@ -12,7 +13,8 @@ const JobCreatePage = () => {
         workType: '',
         jobType: '',
     });
-
+    const { user } = useAuthStore();
+    const userId = user?.id;
 
     const navigate = useNavigate();
 
@@ -24,13 +26,7 @@ const JobCreatePage = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // const createdByUserId = localStorage.getItem('token'); //token degil id olacak duzelt burayi...
-
-        // if (!createdByUserId) {
-        //     alert('Kullanıcı bilgisi alınamadı. Lütfen tekrar giriş yapın.');
-        //     return;
-        // }
-        const createdByUserId = "51c0de63-55c0-4ec7-8ea6-fe5f53984e0c"
+        const createdByUserId = userId;
         try {
             const payload = {
                 title: form.title,

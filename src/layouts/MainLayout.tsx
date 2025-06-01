@@ -23,7 +23,7 @@ const MainLayout = () => {
                     {user && (
                         <>
                             <Typography variant="body1" sx={{ mr: 2 }}>
-                                {user.name}
+                                {user.fullName}
                             </Typography>
                             <Button color="inherit" onClick={handleLogout}>
                                 Logout
