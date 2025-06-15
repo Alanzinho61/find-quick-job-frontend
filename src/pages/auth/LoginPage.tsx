@@ -72,6 +72,10 @@ const LoginPage = () => {
                     <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
                         Login
                     </Button>
+
+                    <Button variant="outlined" color="primary" fullWidth sx={{ mt: 2 }} onClick={() => navigate('/auth/register')}>
+                        Üye değil misiniz? Kayıt Olun
+                    </Button>
                 </form>
             </Box>
         </Container>
