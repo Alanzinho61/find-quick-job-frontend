@@ -21,20 +21,20 @@ const DashboardPage = () => {
 
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/dashboard">
-                        <ListItemText primary="Dashboard" />
+                    <ListItemButton component={Link} to="/applications">
+                        <ListItemText primary="My Applications" />
                     </ListItemButton>
                 </ListItem>
 
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/jobs">
+                    <ListItemButton component={Link} to="/jobs/new">
                         <ListItemText primary="Add Job Post" />
                     </ListItemButton>
                 </ListItem>
 
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/applications">
-                        <ListItemText primary="My Applications" />
+                    <ListItemButton component={Link} to="/jobs">
+                        <ListItemText primary="Jobs" />
                     </ListItemButton>
                 </ListItem>
 
@@ -42,6 +42,7 @@ const DashboardPage = () => {
                     <ListItemButton component={Link} to="/profile">
                         <ListItemText primary="Profile" />
                     </ListItemButton>
+                    {/* son iki list item calismiyor cunku dogru linkleri yok */}
                 </ListItem>
             </List>
         </Box>
