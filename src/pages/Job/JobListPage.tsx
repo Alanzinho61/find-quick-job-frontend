@@ -1,6 +1,5 @@
-import axios from '../../../src/api/axiousInstance';
-import { JobTypeLabels } from '../../constants/enum';
-import { WorkType } from '../../constants/enum';
+import axios from '../../api/axiousInstance';
+import { JobTypeLabels, WorkType } from '../../constants/enum';
 import { useEffect, useState } from 'react';
 import {
     Box,
@@ -8,8 +7,10 @@ import {
     Card,
     CardContent,
     Chip,
-    Divider
+    Divider,
+    Button
 } from '@mui/material';
+import { useAuthStore } from '../../store/authStore';
 
 interface JobPost {
     id: string;
@@ -25,6 +26,7 @@ interface JobPost {
 const JobListPage = () => {
     const [jobs, setJobs] = useState<JobPost[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const user = useAuthStore((state) => state.user);
 
     useEffect(() => {
         const fetchJobs = async () => {
@@ -40,6 +42,22 @@ const JobListPage = () => {
 
         fetchJobs();
     }, []);
+
+    const handleApply = async (jobId: string) => {
+        try {
+            const payload = {
+                userId: user?.id,
+                jobPostId: jobId,
+                message: "Bu iş için başvurmak istiyorum!"
+            };
+
+            await axios.post('/applications', payload);
+            alert("Başvurunuz başarıyla gönderildi.");
+        } catch (error) {
+            console.error('Başvuru sırasında hata oluştu:', error);
+            alert('Başvuru başarısız oldu.');
+        }
+    };
 
     if (loading) {
         return <Typography>Yükleniyor...</Typography>;
@@ -66,11 +84,33 @@ const JobListPage = () => {
                             <Chip label={JobTypeLabels[parseInt(job.jopType)] || 'Unknown'} color="secondary" size="small" />
                         </Box>
 
-                        <Divider sx={{ my: 1 }} />
+                        <Divider sx={{ my: 2 }} />
 
-                        <Typography variant="caption">
-                            Yayınlanma Tarihi: {new Date(job.createdAt).toLocaleDateString()}
-                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography variant="caption" color="text.secondary">
+                                Yayınlanma: {new Date(job.createdAt).toLocaleDateString()}
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+                            <Button
+                                variant="contained"
+                                size="small"
+                                sx={{
+                                    backgroundColor: '#ffb6b9',
+                                    color: '#fff',
+                                    textTransform: 'none',
+                                    borderRadius: '20px',
+                                    px: 3,
+                                    '&:hover': {
+                                        backgroundColor: '#ff8a8a',
+                                    },
+                                }}
+                                onClick={() => handleApply(job.id)}
+                            >
+                                ❤️ Başvur
+                            </Button>
+                        </Box>
                     </CardContent>
                 </Card>
             ))}
